@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/SCREEN"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".login.MainMovie">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_mainmovie_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aigirlpretty"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/siv_mainmovie_sharpshapecorner"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/theedges"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/siv_mainmovie_base"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/siv_mainmovie_base"
+        android:layout_width="match_parent"
+        android:layout_height="326dp"
+        style="@style/SCREEN"
+        app:shapeAppearanceOverlay="@style/TopRoundCorners"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ll"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:circularflow_defaultRadius="36dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_main_movie_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="26dp"
+            android:text="MOVIES+"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:textColor="#0F7CC6"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/btn_main_movie_login"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#0F7CC6"
+            app:cornerRadius="16dp"/>
+
+        <Button
+            android:id="@+id/btn_main_movie_sign_up"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="#0F7CC6"
+            android:layout_marginBottom="36dp"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="16dp"
+            android:padding="12dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

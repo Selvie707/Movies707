@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    style="@style/SCREENBGTINT"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_alertbox_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="You wanna delete this account?"
+        android:textColor="@color/viaa"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:id="@+id/vw_alertbox_horizontalline"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        style="@style/SCREENALERTBOX"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alertbox_title"/>
+
+    <ImageView
+        android:id="@+id/iv_alertbox_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_delete"
+        android:layout_marginTop="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vw_alertbox_horizontalline"
+        app:tint="@color/viaa"/>
+
+    <TextView
+        android:id="@+id/tv_alertbox_anotherwords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to delete this account?"
+        android:textStyle="bold"
+        style="@style/TEXTALERTDIALOG"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_alertbox_pic"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_alertbox_anotherwords">
+
+        <Button
+            android:id="@+id/btn_alertbox_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Yes"
+            app:cornerRadius="16dp"
+            android:textColor="@color/viaa"
+            android:backgroundTint="@color/viai"
+            android:layout_marginRight="6dp"/>
+
+        <Button
+            android:id="@+id/btn_alertbox_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="No"
+            app:cornerRadius="16dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/viaa"
+            android:layout_marginLeft="6dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

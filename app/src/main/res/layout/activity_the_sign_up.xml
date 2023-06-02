@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="26dp"
+    style="@style/SCREEN"
+    tools:context=".login.TheSignUp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_signup_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:textSize="52sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/viaa"
+                    android:layout_marginTop="28dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_signup_firstname"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    style="@style/EDITTEXT"
+                    android:padding="12dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/outlined_edittext"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_signup_usernamealreadyinuse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/ACCESSDENIED"
+                        android:visibility="gone"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginBottom="6dp"
+                        android:text="The username is already in use, try other username"/>
+
+                    <EditText
+                        android:id="@+id/et_signup_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Username"
+                        style="@style/EDITTEXT"
+                        android:padding="12dp"
+                        android:layout_marginTop="32dp"
+                        android:inputType="textEmailAddress"
+                        android:background="@drawable/outlined_edittext"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/et_signup_firstname" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_signup_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    style="@style/EDITTEXT"
+                    android:padding="12dp"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/outlined_edittext"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_signup_username" />
+
+                <EditText
+                    android:id="@+id/et_signup_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    style="@style/EDITTEXT"
+                    android:padding="12dp"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/outlined_edittext"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_signup_email" />
+
+                <LinearLayout
+                    android:id="@+id/ll_signup_passwordall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_signup_passwordwords"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TEXT"
+                        android:visibility="gone"
+                        android:text="Your password is too weak"/>
+
+                    <LinearLayout
+                        android:id="@+id/ll_signup_passwordbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/vw_signup_barmin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_weight="3"
+                            android:visibility="gone"
+                            android:layout_marginRight="2dp"
+                            android:background="@color/viai"/>
+
+                        <View
+                            android:id="@+id/vw_signup_barmid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_weight="3"
+                            android:visibility="gone"
+                            android:layout_marginRight="2dp"
+                            android:background="#ADCEF1"/>
+
+                        <View
+                            android:id="@+id/vw_signup_barmax"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_weight="3"
+                            android:visibility="gone"
+                            android:background="#82B9F3"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_signup_confirmpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    android:padding="12dp"
+                    style="@style/EDITTEXT"
+                    android:inputType="textPassword"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/outlined_edittext"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_signup_password" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/cb_signup_agree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_signup_rememberme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="26dp"
+                        style="@style/TEXT"
+                        android:text="I Agree with privacy and policy"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/cb_signup_agree"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp">
+
+                    <Button
+                        android:id="@+id/btn_signup_signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="36dp"
+                        android:text="Sign Up"
+                        android:textColor="@color/white"
+                        app:cornerRadius="16dp"
+                        android:padding="12dp"
+                        android:backgroundTint="@color/viaa"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/tv_signup_ask"/>
+
+                    <TextView
+                        android:id="@+id/tv_signup_ask"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginLeft="72dp"
+                        style="@style/TEXT"
+                        android:text="Already have an account?"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_signup_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="Login"
+                        android:textStyle="bold"
+                        android:textColor="@color/viaa"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_signup_ask"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

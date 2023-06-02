@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    style="@style/SCREEN"
+    tools:context=".detail.HelpCenter">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_helpcenter_welcomingtext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hi! How can we help you?"
+                android:layout_marginTop="16dp"
+                style="@style/TEXT"
+                android:gravity="center"
+                android:textSize="28sp"/>
+
+            <EditText
+                android:id="@+id/et_helpcenter_searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_search"
+                android:hint="I am looking for..."
+                android:textSize="12sp"
+                android:padding="6dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="22dp"
+                style="@style/EDITTEXT"
+                android:background="@drawable/outlined_edittext"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="22dp">
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="or you can choose a category below"
+                    android:gravity="center"
+                    style="@style/TEXT"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_helpcenter_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_category"/>
+
+                <TextView
+                    android:id="@+id/tv_helpcenter_categoryname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/helpcenter_categoryname"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    style="@style/TEXT"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_helpcenter_category"/>
+
+                <TextView
+                    android:id="@+id/tv_helpcenter_categorydescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil repudiandae voluptatem delectus excepturi"
+                    android:gravity="center"
+                    style="@style/TEXT"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_helpcenter_categoryname"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_helpcenter_categoryhelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                tools:listitem="@layout/helpcenter_category"/>
+
+            <TextView
+                android:id="@+id/tv_helpcenter_morehelpbycontactus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Not helping?"
+                android:gravity="center"
+                android:textSize="20sp"
+                style="@style/TEXT"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_helpcenter_categoryhelp"/>
+
+            <TextView
+                android:id="@+id/tv_helpcenter_morehelpbycontactusdescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Feel free to contact us, we'll help you solve your problems"
+                android:gravity="center"
+                style="@style/TEXT"
+                android:layout_marginTop="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_helpcenter_morehelpbycontactus"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="22dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iv_aboutus_wa"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/wa"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_aboutus_wavia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textSize="16dp"
+                    style="@style/TEXT"
+                    android:text="+62 895621654714"
+                    app:layout_constraintStart_toEndOf="@+id/iv_aboutus_wa"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_aboutus_namewavia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="16dp"
+                    android:text="(Selvie)"
+                    style="@style/TEXT"
+                    app:layout_constraintStart_toEndOf="@+id/tv_aboutus_wavia"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

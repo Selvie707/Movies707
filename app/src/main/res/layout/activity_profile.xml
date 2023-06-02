@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    style="@style/SCREEN"
+    tools:context=".activities.ProfileActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="32dp"
+            android:layout_above="@+id/bn_menu_bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/civ_profile"
+                        android:layout_width="220dp"
+                        android:layout_height="220dp"
+                        android:src="@drawable/via"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_profil_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profil_username"
+                        android:layout_marginTop="22dp"
+                        android:textSize="32sp"
+                        style="@style/TEXT"
+                        app:layout_constraintTop_toBottomOf="@+id/civ_profile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tv_profile_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profil_description"
+                        android:textSize="18sp"
+                        style="@style/TEXT"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_profil_username"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_profile">
+
+                    <EditText
+                        android:id="@+id/et_edit_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   Edit Profile"
+                        android:drawableStart="@drawable/ic_edit"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <EditText
+                        android:id="@+id/et_rate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   Rate This App"
+                        android:drawableStart="@drawable/ic_rate"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/et_edit_profile"/>
+
+                    <EditText
+                        android:id="@+id/et_help_center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   Help Center"
+                        android:layout_marginTop="8dp"
+                        android:drawableStart="@drawable/ic_help"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        app:layout_constraintTop_toBottomOf="@id/et_rate"/>
+
+                    <EditText
+                        android:id="@+id/et_about_us"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   About Me"
+                        android:layout_marginTop="8dp"
+                        android:drawableStart="@drawable/ic_info"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        app:layout_constraintTop_toBottomOf="@id/et_help_center"/>
+
+                    <EditText
+                        android:id="@+id/et_log_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   Log Out"
+                        android:drawableStart="@drawable/ic_log_out"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        app:layout_constraintTop_toBottomOf="@id/et_about_us"/>
+
+                    <EditText
+                        android:id="@+id/et_profile_deleteacc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:text="   Delete Account"
+                        android:drawableStart="@drawable/ic_delete"
+                        android:drawableEnd="@drawable/ic_right_arrow"
+                        android:padding="12dp"
+                        style="@style/EDITTEXT"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/outlined_edittext"
+                        android:editable="false"
+                        app:layout_constraintTop_toBottomOf="@id/et_log_out"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bn_menu_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_menu"
+            style="@style/MENUBOTTOM"
+            android:layout_alignParentBottom="true"
+            />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

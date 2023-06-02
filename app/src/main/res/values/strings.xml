@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Movies</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="profil_username">Via 707</string>
+
+    <string name="profil_description">Lets go to the space</string>
+
+    <string name="detail_title">Dr. Stone</string>
+
+    <string name="detail_ratting">9.8</string>
+
+    <string name="detail_genre">Action</string>
+
+    <string name="helpcenter_categoryname">Getting Started</string>
+
+    <string name="helpcenter_percategory">Using this app</string>
+
+    <string name="helpcenter_words">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil repudiandae voluptatem delectus excepturi similique natus, provident nulla et esse aliquid qui? Necessitatibus tempore ad beatae deserunt suscipit ducimus doloremque. Quis labore sunt id facere. Quis nam commodi repudiandae blanditiis accusamus tempora. Quis excepturi quae non aperiam quos distinctio ex, eveniet voluptates necessitatibus odio. Quos quas voluptate iure esse, modi adipisci expedita neque totam inventore veritatis sequi illum repellendus beatae nemo cum delectus distinctio corrupti deleniti soluta possimus! Soluta ipsum debitis, voluptates reiciendis vero laborum dolore odio culpa natus ex laudantium aperiam quidem ratione. Placeat, sed sit neque reiciendis non distinctio debitis impedit odio asperiores! Blanditiis, recusandae impedit deserunt autem quis quos nam soluta sint, distinctio, iste amet provident et harum at itaque veniam error consectetur ducimus voluptates quisquam. Consequatur sed molestiae voluptates corrupti quia mollitia iure tempora repudiandae nemo facilis harum amet itaque rerum magni natus neque, nostrum aperiam tenetur eum maxime? Quibusdam, vitae esse. Possimus fugiat et reprehenderit eius magni, dolores amet ratione unde, labore a aliquam voluptatibus, odio omnis tenetur cumque adipisci delectus architecto soluta quia excepturi corporis numquam accusamus quasi? Animi excepturi voluptatum, soluta cupiditate nulla voluptatibus perferendis quo reprehenderit, recusandae fuga corrupti veritatis obcaecati. Delectus deserunt laboriosam quasi. Architecto quibusdam quasi ullam pariatur excepturi praesentium. Quia, repudiandae, rem optio sed quae veritatis eligendi id voluptatibus nam itaque similique nihil totam dolorem aut minus, hic ipsum accusantium labore eius molestiae! Iure et dicta laudantium. Eligendi praesentium culpa nobis dolorem beatae iure soluta at odio cumque dolorum, facilis accusantium distinctio, libero optio eaque quisquam
+    </string>
+
+    <string name="main_movie_words">Lets make your day by watching together in this app!</string>
+
+    <string name="detail_sinopsis">
+        One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he’s got a grand plan in mind—to kickstart civilization with the power of science!
+        One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he’s got a grand plan in mind—to kickstart civilization with the power of science!
+        One fateful day, all of humanity was petrified by a blinding flash of light. After several millennia, high schooler Taiju awakens and finds himself lost in a world of statues. However, he’s not alone! His science-loving friend Senku’s been up and running for a few months and he’s got a grand plan in mind—to kickstart civilization with the power of science!
+
+    </string>
+
+    <string-array name="stringSpAz">
+        <item>A-Z</item>
+        <item>Z-A</item>
+    </string-array>
+
+    <string-array name="stringSpYear">
+        <item>Year</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
+        <item>2023</item>
+    </string-array>
+
+    <string-array name="stringSpGenre">
+        <item>Genre</item>
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Animation</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Family</item>
+        <item>Fantasy</item>
+        <item>History</item>
+        <item>Horror</item>
+        <item>Music</item>
+        <item>Mystery</item>
+        <item>Romance</item>
+        <item>Science Fiction</item>
+        <item>TV Movie</item>
+        <item>Thriller</item>
+        <item>War</item>
+        <item>Western</item>
+    </string-array>
+
+    <string-array name="stringSpAge">
+        <item>Age</item>
+        <item>8+</item>
+        <item>13+</item>
+        <item>18+</item>
+    </string-array>
+</resources>

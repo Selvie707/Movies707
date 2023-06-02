@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RoundCorner">
+        <item name="cornerSizeBottomLeft">38%</item>
+    </style>
+
+    <style name="RoundCorners">
+        <item name="cornerSizeBottomRight">50%</item>
+    </style>
+
+    <style name="TopRoundCorners">
+        <item name="cornerSizeTopRight">38%</item>
+        <item name="android:startColor">@color/viaa</item>
+    </style>
+</resources>

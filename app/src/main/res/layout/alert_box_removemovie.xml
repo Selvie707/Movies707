@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical"
+    style="@style/SCREENBGTINT"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_alertbox_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_delete"
+        android:layout_gravity="center_horizontal"
+        app:tint="@color/viaa"/>
+
+    <TextView
+        android:id="@+id/tv_alertbox_anotherwords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Removed Successfully"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/viaa"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tv_alertbox_anotherwordss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hope you find another nice movie out there!"
+        android:textSize="16sp"
+        style="@style/TEXTALERTDIALOG"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/btn_alertbox_confirm"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Okay!"
+        app:cornerRadius="16dp"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/viaa"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_helpcenter_viewholder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    style="@style/SCREEN"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_helpcenter_helpone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="12sp"
+        style="@style/EDITTEXT"
+        android:drawableEnd="@drawable/arrow_right_up"
+        android:text="@string/helpcenter_categoryname"
+        android:background="@drawable/outlined_edittext"
+        android:editable="false"/>
+
+    <EditText
+        android:id="@+id/et_helpcenter_helptwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="12sp"
+        android:visibility="gone"
+        style="@style/TEXT"
+        android:text="@string/helpcenter_categoryname"
+        android:background="@drawable/outlined_edittext"
+        android:editable="false"/>
+</LinearLayout>
