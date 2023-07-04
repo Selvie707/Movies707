@@ -83,5 +83,6 @@ public interface TheApi {
     Call<com.example.movies.accountmodels.Root> updateAcc(@Path("id") int id,
                                                           @Field("username") String username,
                                                           @Field("email") String email,
-                                                          @Field("bio") String bio);
+                                                          @Field("bio") String bio,
+                                                          @Field("photoprofile") String photoprofile);
 }

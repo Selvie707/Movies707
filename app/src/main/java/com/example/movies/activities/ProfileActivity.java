@@ -10,11 +10,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +41,9 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
 
     private TextView tvProfileName, tvProfileBio;
-
+    private ImageView ivProfilePic;
     private int theid;
-    private static String username, bio;
+    private static String username, bio, profilepic;
 
     private BottomNavigationView bnvBottomMenu;
     private RecyclerView rvRecentlyWatched;
@@ -60,9 +62,21 @@ public class ProfileActivity extends AppCompatActivity {
         theid = Integer.parseInt(sp.getString("id", ""));
         username = sp.getString("username", "");
         bio = sp.getString("bio", "");
+        profilepic = sp.getString("profilepic", "");
+
+        Log.d("theprofile", profilepic);
 
         tvProfileName = findViewById(R.id.tv_profil_username);
         tvProfileBio = findViewById(R.id.tv_profile_description);
+        ivProfilePic = findViewById(R.id.civ_profile);
+
+        if (profilepic == null || profilepic.isEmpty()) {
+            ivProfilePic.setImageResource(R.drawable.via);
+        } else {
+            ivProfilePic.setImageURI(Uri.parse(profilepic));
+        }
+
+        ivProfilePic.setImageURI(Uri.parse(profilepic));
 
         tvProfileName.setText(username);
         tvProfileBio.setText(bio);

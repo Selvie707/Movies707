@@ -82,12 +82,37 @@ public class TheSignUp extends AppCompatActivity {
                 tvPassWords.setVisibility(View.VISIBLE);
                 vwBarMin.setVisibility(View.VISIBLE);
 
+
+                String a = String.valueOf(vwBarMax.getVisibility());
+                String b = String.valueOf(vwBarMid.getVisibility());
+                String c = String.valueOf(vwBarMin.getVisibility());
+
+
+
+
                 if (passworda.length() < 5) {
                     tvPassWords.setText("Your password is too weak!");
-                } else if (passworda.length() >= 5 && passworda.length() < 8) {
+                    vwBarMid.setVisibility(View.GONE);
+                    vwBarMax.setVisibility(View.GONE);
+
+                    btn_signup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(TheSignUp.this, "Your password is too weak!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else if (passworda.length() >= 5 && passworda.length() <= 7) {
                     tvPassWords.setText("Just a little bit more!");
                     vwBarMid.setVisibility(View.VISIBLE);
-                } else if (passworda.length() >= 8) {
+                    vwBarMax.setVisibility(View.GONE);
+
+                    btn_signup.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(TheSignUp.this, "Your password is too weak!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else if (passworda.length() > 7) {
                     tvPassWords.setText("It's perfect!");
                     vwBarMax.setVisibility(View.VISIBLE);
 

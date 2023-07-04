@@ -49,6 +49,7 @@ public class MovieActivity extends AppCompatActivity {
     private SearchView svSearch;
     private BottomNavigationView bnvBottomMenu;
     private RecyclerView rvRecentlyWatched;
+    private TextView tvInfoemptylist;
 
 //    private ArrayList<Movie> movieData = new ArrayList<>();
 
@@ -73,6 +74,8 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
 
         Popular();
+
+        tvInfoemptylist = findViewById(R.id.tv_download_infoemptylist);
 
         svSearch = findViewById(R.id.et_main_search);
         svSearch.clearFocus();
@@ -126,8 +129,11 @@ public class MovieActivity extends AppCompatActivity {
         }
 
         if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No Movie Found", Toast.LENGTH_SHORT).show();
+            tvInfoemptylist.setVisibility(View.VISIBLE);
+            rvRecentlyWatched.setVisibility(View.GONE);
         } else {
+            tvInfoemptylist.setVisibility(View.GONE);
+            rvRecentlyWatched.setVisibility(View.VISIBLE);
             adapterMovie.setFilteredList(filteredList);
         }
     }

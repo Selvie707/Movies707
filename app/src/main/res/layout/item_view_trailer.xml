@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_recently_watched"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:src="@drawable/via"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/tv_recent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Artist"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            style="@style/TEXT"
+            android:ellipsize="end"
+            android:maxLines="2"
+            />
+
+        <TextView
+            android:id="@+id/tv_recent_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Artist"
+            android:textSize="12sp"
+            style="@style/TEXT"/>
+
+        <TextView
+            android:id="@+id/tv_recent_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_sinopsis"
+            android:maxLines="3"
+            android:textSize="12sp"
+            style="@style/TEXT"/>
+
+    </LinearLayout>
+
+</LinearLayout>

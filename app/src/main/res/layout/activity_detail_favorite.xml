@@ -30,6 +30,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_detailfavorite_downloadbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_download"
+                    app:elevation="0dp"
+                    app:tint="@color/via"
+                    android:layout_marginTop="16dp"
+                    android:layout_toLeftOf="@id/fab_detailfavorite_favoritebutton"/>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_detailfavorite_favoritebutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite"
+                    app:elevation="0dp"
+                    app:tint="@color/via"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,7 +72,6 @@
                     android:textSize="38sp"
                     android:textStyle="bold"
                     style="@style/TEXT"
-                    android:layout_marginTop="16dp"
                     android:gravity="center_horizontal"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -58,25 +84,6 @@
                     app:layout_constraintTop_toBottomOf="@id/rv_detailrecentlywatched_genre"
                     app:layout_constraintEnd_toEndOf="parent">
 
-                    <CheckBox
-                        android:id="@+id/cb_detail_favorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:button="@drawable/selector_favorite"
-                        android:checked="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"/>
-
-                    <ImageView
-                        android:id="@+id/iv_detailrecentlywatched_download"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="@style/IMAGEVIEWDETAIL"
-                        android:src="@drawable/ic_download"
-                        android:layout_marginLeft="8dp"
-                        android:layout_toRightOf="@id/cb_detail_favorite"
-                        android:layout_centerVertical="true"/>
-
                     <TextView
                         android:id="@+id/tv_detail_sinopsis_title"
                         android:layout_width="wrap_content"
@@ -87,8 +94,8 @@
                         style="@style/TEXT"
                         android:layout_centerVertical="true"
                         android:gravity="center_horizontal"
-                        android:layout_toLeftOf="@id/tv_detailrecentlywatched_ratting"
-                        android:layout_toRightOf="@id/iv_detailrecentlywatched_download"/>
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"/>
 
                     <TextView
                         android:id="@+id/tv_detailrecentlywatched_ratting"

@@ -79,6 +79,11 @@ public class TheLogin extends AppCompatActivity {
         spA = getSharedPreferences("theaccadditional", MODE_PRIVATE);
 
         if (spA.getString("usernameA", null) != null && spA.getString("passwordA", null) != null) {
+            Intent intent = new Intent(TheLogin.this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        if (spA.getString("usernameA", null) != null && spA.getString("passwordA", null) != null) {
             etUsername.setText(spA.getString("usernameA", null));
             etPassword.setText(spA.getString("passwordA", null));
         }
@@ -160,9 +165,12 @@ public class TheLogin extends AppCompatActivity {
                             editor.putString("id", account.getId());
                             editor.putString("bio", account.getBio());
                             editor.putString("email", account.getEmail());
+                            editor.putString("profilepic", account.getPhotoprofile());
                         }
 
                         editor.apply();
+
+                        Log.d("thethe", sp.getString("profilepic", ""));
 
                         Intent intent = new Intent(TheLogin.this, MainActivity.class);
 //                        intent.putExtra("xUsername", username);

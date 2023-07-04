@@ -15,29 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.movies.R;
+import com.example.movies.activities.TrailerActivity;
 import com.example.movies.detail.DetailDownloadMovie;
-import com.example.movies.detail.DetailRecentlyWatched;
 import com.example.movies.myfavmodels.Datum;
 
 import java.util.ArrayList;
 
-public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHolder> {
+public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.ViewHolder> {
     private Context ctx;
     private ArrayList<Datum> daftarFavorit;
 
-    public DownloadAdapter(ArrayList<Datum> daftarFavorit) {
+    public TrailerAdapter(ArrayList<Datum> daftarFavorit) {
         this.daftarFavorit = daftarFavorit;
-    }
-
-    public void setFilteredList(ArrayList<Datum> filteredList) {
-        this.daftarFavorit = filteredList;
-        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recently_watched_viewpager, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_trailer, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,6 +41,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         Datum rwm = daftarFavorit.get(position);
         holder.tvTitle.setText(rwm.getTitle());
         holder.tvYear.setText(rwm.getReleasedate());
+        holder.tvDescription.setText(rwm.getSinopsis());
         Glide.with(holder.itemView.getContext())
                 .load(rwm.getPosterpath())
                 .apply(new RequestOptions().override(350, 550))
@@ -54,21 +50,12 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String title = rwm.getTitle();
-//                String year = rwm.getRelease_date();
-//                String photo = rwm.getPoster_path();
-//
-//                Intent intent = new Intent(holder.itemView.getContext(), DetailRecentlyWatched.class);
-//                intent.putExtra("varTitle", title);
-//                intent.putExtra("varYear", year);
-//                intent.putExtra("varPhoto", photo);
-//                holder.itemView.getContext().startActivity(intent);
 
                 String id = String.valueOf(rwm.getId());
                 String trailerid = rwm.getTrailerid();
 
-                Intent intent = new Intent(holder.itemView.getContext(), DetailDownloadMovie.class);
-                intent.putExtra("varId", id);
+                Intent intent = new Intent(holder.itemView.getContext(), TrailerActivity.class);
+                intent.putExtra("varIdd", id);
                 intent.putExtra("varTrailerId", trailerid);
 
                 holder.itemView.getContext().startActivity(intent);
@@ -87,7 +74,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivPhoto;
-        TextView tvTitle, tvYear;
+        TextView tvTitle, tvYear, tvDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,6 +82,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
             ivPhoto = itemView.findViewById(R.id.iv_recently_watched);
             tvTitle = itemView.findViewById(R.id.tv_recent_title);
             tvYear = itemView.findViewById(R.id.tv_recent_year);
+            tvDescription = itemView.findViewById(R.id.tv_recent_description);
         }
     }
 }

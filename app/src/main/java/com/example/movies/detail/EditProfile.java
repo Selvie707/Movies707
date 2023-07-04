@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,12 +38,22 @@ public class EditProfile extends AppCompatActivity {
     private EditText etUsername, etEmail, etBio;
     private Button btnSimpan;
     private int id;
-    private String username, email, bio, Nusername, Nemail, Nbio;
+    private String username, email, bio, Nusername, Nemail, Nbio, imagePath, theProfilePic, Nimagepath;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ivProfilPicture.setImageURI(data.getData());
+        Log.d("imageURI", String.valueOf(data.getData()));
+
+        imagePath = data.getData().toString();
+
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("theacc", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("profilepic", imagePath);
+        editor.apply();
+
+        Log.d("insideeditprofile", imagePath);
     }
 
     @Override
@@ -65,6 +78,7 @@ public class EditProfile extends AppCompatActivity {
         username = sp.getString("username", "");
         email = sp.getString("email", "");
         bio = sp.getString("bio", "");
+        theProfilePic = sp.getString("profilepic", "");
 
         ivEdit = findViewById(R.id.iv_editprofile_changeprofilepicture);
         ivProfilPicture = findViewById(R.id.civ_editprofile_profilepicture);
@@ -72,6 +86,12 @@ public class EditProfile extends AppCompatActivity {
         etEmail = findViewById(R.id.et_editprofile_email);
         etBio = findViewById(R.id.et_editprofile_bio);
         btnSimpan = findViewById(R.id.btn_editprofile_simpan);
+
+        if (theProfilePic == null || theProfilePic.isEmpty()) {
+            ivProfilPicture.setImageResource(R.drawable.via);
+        } else {
+            ivProfilPicture.setImageURI(Uri.parse(theProfilePic));
+        }
 
         etUsername.setText(username);
         etEmail.setText(email);
@@ -94,9 +114,12 @@ public class EditProfile extends AppCompatActivity {
                     etBio.setError("Masukkan Bio");
                 }
                 else {
+                    SharedPreferences sp = getApplicationContext().getSharedPreferences("theacc", MODE_PRIVATE);
+                    theProfilePic = sp.getString("profilepic", "");
+
                     TheApi ardData = Retrofit.getRetrofit().create(TheApi.class);
-                    Call<Root> call = ardData.updateAcc(id, Nusername, Nemail, Nbio);
-                    Log.d("editprofile", id + Nusername + Nemail + Nbio);
+                    Call<Root> call = ardData.updateAcc(id, Nusername, Nemail, Nbio, theProfilePic);
+                    Log.d("editprofile", id + Nusername + Nemail + Nbio + theProfilePic);
                     call.enqueue(new Callback<Root>() {
                         @Override
                         public void onResponse(Call<Root> call, Response<Root> response) {
@@ -104,6 +127,7 @@ public class EditProfile extends AppCompatActivity {
                             editor.putString("username", Nusername);
                             editor.putString("email", Nemail);
                             editor.putString("bio", Nbio);
+                            editor.putString("profilepic", theProfilePic);
                             editor.apply();
 
                             int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;

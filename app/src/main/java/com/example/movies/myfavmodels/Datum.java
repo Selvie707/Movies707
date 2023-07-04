@@ -9,6 +9,7 @@ public class Datum{
     public String ratting;
     public String releasedate;
     public String sinopsis;
+    public String trailerid;
 
     public String getId() {
         return id;
@@ -40,5 +41,9 @@ public class Datum{
 
     public String getSinopsis() {
         return sinopsis;
+    }
+
+    public String getTrailerid() {
+        return trailerid;
     }
 }

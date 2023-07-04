@@ -12,4 +12,8 @@
         <item name="cornerSizeTopRight">38%</item>
         <item name="android:startColor">@color/viaa</item>
     </style>
+
+    <style name="RoundCornerTrailer">
+        <item name="cornerSizeBottomLeft">102%</item>
+    </style>
 </resources>

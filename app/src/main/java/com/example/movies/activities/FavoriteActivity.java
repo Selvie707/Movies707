@@ -184,8 +184,11 @@ public class FavoriteActivity extends AppCompatActivity {
         }
 
         if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No Movie Found", Toast.LENGTH_SHORT).show();
+            tvInfoemprylist.setVisibility(View.VISIBLE);
+            rvRecentlyWatched.setVisibility(View.GONE);
         } else {
+            tvInfoemprylist.setVisibility(View.GONE);
+            rvRecentlyWatched.setVisibility(View.VISIBLE);
             adapterFavorit.setFilteredList(filteredList);
         }
     }

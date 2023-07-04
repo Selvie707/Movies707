@@ -7,6 +7,7 @@ public class Datum{
     public String email;
     public String password;
     public String bio;
+    public String photoprofile;
 
     public String getId() {
         return id;
@@ -30,5 +31,9 @@ public class Datum{
 
     public String getBio() {
         return bio;
+    }
+
+    public String getPhotoprofile() {
+        return photoprofile;
     }
 }

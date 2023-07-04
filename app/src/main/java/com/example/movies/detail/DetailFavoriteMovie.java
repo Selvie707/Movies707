@@ -21,12 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.movies.R;
+import com.example.movies.activities.FavoriteActivity;
 import com.example.movies.adapter.DetailGenreAdapter;
 import com.example.movies.api.GetApi;
 import com.example.movies.api.Retrofit;
 import com.example.movies.apivia.TheApi;
 import com.example.movies.detailmodel.Genre;
 import com.example.movies.detailmodel.Root;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -39,16 +41,14 @@ public class DetailFavoriteMovie extends AppCompatActivity {
     private ArrayList<Genre> alGenre;
     private DetailGenreAdapter adapterGenre;
     private LinearLayoutManager llmMovie;
-
+    private FloatingActionButton fabFavorite, fabDownload;
     private RecyclerView rvGenre;
-    private ImageView ivPhoto, ivDownload;
+    private ImageView ivPhoto;
     private TextView tvTitle, tvOverview, tvRate;
 
     private String idd, title, releasedate, genre, posterpath, sinopsis;
     private int theid;
     private double ratting;
-
-    private CheckBox cbFavorit;
 
     private int mView = 0; // 0 card, 1 grid
     //static variabel
@@ -107,23 +107,59 @@ public class DetailFavoriteMovie extends AppCompatActivity {
                 tvOverview.setText(response.body().getOverview());
                 Glide.with(DetailFavoriteMovie.this).load(response.body().getPoster_path()).into(ivPhoto);
 
-                cbFavorit = findViewById(R.id.cb_detail_favorite);
-                cbFavorit.setOnClickListener(view -> {
+                fabFavorite = findViewById(R.id.fab_detailfavorite_favoritebutton);
+                fabFavorite.setOnClickListener(view -> {
                     TheApi ardData = com.example.movies.apivia.Retrofit.getRetrofit().create(TheApi.class);
                     Call<com.example.movies.myfavmodels.Root> retPro = ardData.createMovie(idd, theid, title, posterpath, RetriverMovie(), ratting, releasedate, sinopsis);
 
                     retPro.enqueue(new Callback<com.example.movies.myfavmodels.Root>() {
                         @Override
                         public void onResponse(Call<com.example.movies.myfavmodels.Root> call1, Response<com.example.movies.myfavmodels.Root> response1) {
-                            if (cbFavorit.isChecked()) {
-                                if (response1.body().getPesan().equals("ID sudah ada")) {
-                                    Toast.makeText(DetailFavoriteMovie.this, "This Movie is already on your favorite list, let's watch it!", Toast.LENGTH_SHORT).show();
-                                } else {
+//                            if (cbFavorit.isChecked()) {
+//                                if (response1.body().getPesan().equals("ID sudah ada")) {
+//                                    Toast.makeText(DetailFavoriteMovie.this, "This Movie is already on your favorite list, let's watch it!", Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+//                                    boolean isDarkTheme = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+//
+//                                    AlertDialog.Builder dialog = new AlertDialog.Builder(DetailFavoriteMovie.this);
+//                                    View abView = getLayoutInflater().inflate(R.layout.alert_box_addmovie, null);
+//                                    dialog.setView(abView);
+//
+//                                    AlertDialog theAlertDialog = dialog.create();
+//
+//                                    if (isDarkTheme) {
+//                                        theAlertDialog.getWindow().getDecorView().setBackgroundResource(R.drawable.outlined_alertboxdark);
+//                                    } else {
+//                                        theAlertDialog.getWindow().getDecorView().setBackgroundResource(R.drawable.outlined_alertbox);
+//                                    }
+//
+//                                    theAlertDialog.setCancelable(false);
+//
+//                                    abView.findViewById(R.id.btn_alertbox_confirm).setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            theAlertDialog.dismiss();
+//                                            finish();
+//                                        }
+//                                    });
+//                                    theAlertDialog.show();
+//                                }
+//                            }
+//                            else {
+//
+//                            }
+                            TheApi ardDatas = com.example.movies.apivia.Retrofit.getRetrofit().create(TheApi.class);
+                            Call<com.example.movies.myfavmodels.Root> retPros = ardDatas.deleteFavorite(idd, theid);
+                            Log.d("Unfavorite", idd + theid);
+                            retPros.enqueue(new Callback<com.example.movies.myfavmodels.Root>() {
+                                @Override
+                                public void onResponse(Call<com.example.movies.myfavmodels.Root> call, Response<com.example.movies.myfavmodels.Root> response) {
                                     int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
                                     boolean isDarkTheme = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
 
                                     AlertDialog.Builder dialog = new AlertDialog.Builder(DetailFavoriteMovie.this);
-                                    View abView = getLayoutInflater().inflate(R.layout.alert_box_addmovie, null);
+                                    View abView = getLayoutInflater().inflate(R.layout.alert_box_removemovie, null);
                                     dialog.setView(abView);
 
                                     AlertDialog theAlertDialog = dialog.create();
@@ -140,53 +176,19 @@ public class DetailFavoriteMovie extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             theAlertDialog.dismiss();
+                                            startActivity(new Intent(DetailFavoriteMovie.this, FavoriteActivity.class));
                                             finish();
                                         }
                                     });
                                     theAlertDialog.show();
                                 }
-                            }
-                            else {
-                                TheApi ardDatas = com.example.movies.apivia.Retrofit.getRetrofit().create(TheApi.class);
-                                Call<com.example.movies.myfavmodels.Root> retPros = ardDatas.deleteFavorite(idd, theid);
-                                Log.d("Unfavorite", idd + theid);
-                                retPros.enqueue(new Callback<com.example.movies.myfavmodels.Root>() {
-                                    @Override
-                                    public void onResponse(Call<com.example.movies.myfavmodels.Root> call, Response<com.example.movies.myfavmodels.Root> response) {
-                                        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-                                        boolean isDarkTheme = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
 
-                                        AlertDialog.Builder dialog = new AlertDialog.Builder(DetailFavoriteMovie.this);
-                                        View abView = getLayoutInflater().inflate(R.layout.alert_box_removemovie, null);
-                                        dialog.setView(abView);
-
-                                        AlertDialog theAlertDialog = dialog.create();
-
-                                        if (isDarkTheme) {
-                                            theAlertDialog.getWindow().getDecorView().setBackgroundResource(R.drawable.outlined_alertboxdark);
-                                        } else {
-                                            theAlertDialog.getWindow().getDecorView().setBackgroundResource(R.drawable.outlined_alertbox);
-                                        }
-
-                                        theAlertDialog.setCancelable(false);
-
-                                        abView.findViewById(R.id.btn_alertbox_confirm).setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                theAlertDialog.dismiss();
-                                                finish();
-                                            }
-                                        });
-                                        theAlertDialog.show();
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<com.example.movies.myfavmodels.Root> call, Throwable t) {
-                                        MyToast("Something went wrong while unfavorite the movie");
-                                        finish();
-                                    }
-                                });
-                            }
+                                @Override
+                                public void onFailure(Call<com.example.movies.myfavmodels.Root> call, Throwable t) {
+                                    MyToast("Something went wrong while unfavorite the movie");
+                                    finish();
+                                }
+                            });
                         }
 
                         @Override
@@ -198,8 +200,8 @@ public class DetailFavoriteMovie extends AppCompatActivity {
                     });
                 });
 
-                ivDownload = findViewById(R.id.iv_detailrecentlywatched_download);
-                ivDownload.setOnClickListener(new View.OnClickListener() {
+                fabDownload = findViewById(R.id.fab_detailfavorite_downloadbutton);
+                fabDownload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         TheApi ardData = com.example.movies.apivia.Retrofit.getRetrofit().create(TheApi.class);

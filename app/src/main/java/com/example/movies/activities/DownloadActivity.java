@@ -46,9 +46,7 @@ public class DownloadActivity extends AppCompatActivity {
     private SearchView svSearch;
     private BottomNavigationView bnvBottomMenu;
     private ProgressBar pbMovie;
-
     private RecyclerView rvRecentlyWatched;
-
     private DownloadAdapter adapterDownload;
     private ArrayList<Datum> listFavorit;
     private int theid;
@@ -199,8 +197,11 @@ public class DownloadActivity extends AppCompatActivity {
         }
 
         if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No Movie Found", Toast.LENGTH_SHORT).show();
+            tvInfoemptylist.setVisibility(View.VISIBLE);
+            rvRecentlyWatched.setVisibility(View.GONE);
         } else {
+            tvInfoemptylist.setVisibility(View.GONE);
+            rvRecentlyWatched.setVisibility(View.VISIBLE);
             adapterDownload.setFilteredList(filteredList);
         }
     }

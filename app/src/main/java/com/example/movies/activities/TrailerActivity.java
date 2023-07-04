@@ -1,115 +1,133 @@
-package com.example.movies.detail;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+package com.example.movies.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.movies.R;
-import com.example.movies.activities.TrailerActivity;
-import com.example.movies.adapter.DetailGenreAdapter;
+import com.example.movies.adapter.DownloadAdapter;
+import com.example.movies.adapter.TrailerAdapter;
 import com.example.movies.api.GetApi;
-import com.example.movies.api.Retrofit;
+import com.example.movies.apivia.Retrofit;
 import com.example.movies.apivia.TheApi;
-import com.example.movies.detailmodel.Genre;
-import com.example.movies.detailmodel.Root;
+import com.example.movies.detail.DetailDownloadMovie;
+import com.example.movies.myfavmodels.Datum;
+import com.example.movies.myfavmodels.Root;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailDownloadMovie extends AppCompatActivity {
-    private String arrayString;
-    private ArrayList<Genre> alGenre;
-    private DetailGenreAdapter adapterGenre;
-    private LinearLayoutManager llmMovie;
-    private FloatingActionButton fabPlay;
-    private RecyclerView rvGenre;
-    private ImageView ivPhoto, ivDownload;
-    private TextView tvTitle, tvOverview, tvRate;
-    private String idd, title, releasedate, genre, posterpath, sinopsis;
-    private int theid, id;
-    private double ratting;
-
-    private CheckBox cbFavorit;
-
-    private int mView = 0; // 0 card, 1 grid
-    //static variabel
-    static final String STATE_MODE = "MODE VIEW";
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt(STATE_MODE, mView);
-        super.onSaveInstanceState(outState);
-    }
+public class TrailerActivity extends AppCompatActivity {
+    private ImageView ivBack;
+    private TextView tvTitle;
+    private RecyclerView rvTrailerList;
+    private YouTubePlayerView ypvVideo;
+    private FloatingActionButton fabFullScreen, fabBack;
+    private ArrayList<Datum> listFavorit;
+    private TrailerAdapter trailerAdapter;
+    private ProgressBar pbMovie;
+    private int theid, iid;
+    private String idd, title, releasedate, genre, posterpath, sinopsis, trailerid, id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_download);
+        setContentView(R.layout.activity_trailer);
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("theacc", MODE_PRIVATE);
         theid = Integer.parseInt(sp.getString("id", ""));
 
         Intent intent = getIntent();
-        id = Integer.parseInt(intent.getStringExtra("varId"));
-        String trailerid = intent.getStringExtra("varTrailerId");
+        id = intent.getStringExtra("varIdd");
 
-        rvGenre = findViewById(R.id.rv_detailrecentlywatched_genre);
+        if (id != null && !id.isEmpty()) {
+            iid = Integer.parseInt(id);
+        } else {
+            Toast.makeText(this, "The ID is empty guys", Toast.LENGTH_SHORT).show();
+        }
 
-        llmMovie = new GridLayoutManager(this, 2);
-        rvGenre.setLayoutManager(llmMovie);
+        pbMovie = findViewById(R.id.pb_main);
+        rvTrailerList = findViewById(R.id.rv_trailer_trailerlist);
+        ypvVideo = findViewById(R.id.yp_detail_trailer);
+        fabFullScreen = findViewById(R.id.fab_trailer_screen);
+        tvTitle = findViewById(R.id.tv_trailer_judul);
+        ivBack = findViewById(R.id.iv_trailer_back);
+        fabBack = findViewById(R.id.fab_trailer_back);
 
-        ivPhoto = findViewById(R.id.iv_detail_movie);
-        tvTitle = findViewById(R.id.tv_detail_title);
-        tvRate = findViewById(R.id.tv_detailrecentlywatched_ratting);
-        tvOverview = findViewById(R.id.tv_detail_sinopsis);
-        fabPlay = findViewById(R.id.fab_detaildownload_playbutton);
+        rvTrailerList.setHasFixedSize(true);
+        rvTrailerList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        RetriverMovie();
+        RetriverMovie(theid);
 
-        GetApi api = Retrofit.getRetrofit().create(GetApi.class);
-        Call<Root> detailApi = api.getDetail(Integer.parseInt(String.valueOf(id)),
-                ("0a9d3ed8c00f265589f595b6f3b92228"));
-
-        detailApi.enqueue(new Callback<Root>() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Root> call, Response<Root> response) {
+            public void onClick(View v) {
+                startActivity(new Intent(TrailerActivity.this, DetailDownloadMovie.class));
+                finish();
+            }
+        });
+
+        fabBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TrailerActivity.this, DownloadActivity.class));
+                finish();
+            }
+        });
+
+        fabFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int orientation = getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    fabFullScreen.setImageResource(R.drawable.ic_exitfullscreen);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    fabFullScreen.setImageResource(R.drawable.ic_fullscreen);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    Toast.makeText(TrailerActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        GetApi api = com.example.movies.api.Retrofit.getRetrofit().create(GetApi.class);
+        Call<com.example.movies.detailmodel.Root> detailApi = api.getDetail(iid, ("0a9d3ed8c00f265589f595b6f3b92228"));
+
+        detailApi.enqueue(new Callback<com.example.movies.detailmodel.Root>() {
+            @Override
+            public void onResponse(Call<com.example.movies.detailmodel.Root> call, Response<com.example.movies.detailmodel.Root> response) {
                 idd = String.valueOf(response.body().getId());
                 title = response.body().getTitle();
                 releasedate = response.body().getRelease_date();
                 genre = String.valueOf(response.body().getGenres());
                 posterpath = response.body().getPoster_path();
                 sinopsis = response.body().getOverview();
-                ratting = response.body().getVote_average();
-
-//                Toast.makeText(DetailRecentlyWatched.this, idd+title+releasedate+genre+posterpath+sinopsis+ratting+RetriverMovie(), Toast.LENGTH_SHORT).show();
 
                 String rate = String.valueOf(response.body().getVote_average());
 
                 tvTitle.setText(response.body().getTitle());
-                tvRate.setText(rate);
-                tvOverview.setText(response.body().getOverview());
-                Glide.with(DetailDownloadMovie.this).load(response.body().getPoster_path()).into(ivPhoto);
-
 //                fabFavorite.setOnClickListener(view -> {
 //                    TheApi ardData = com.example.movies.apivia.Retrofit.getRetrofit().create(TheApi.class);
 //                    Call<com.example.movies.myfavmodels.Root> retPro = ardData.createMovie(idd, theid, title, posterpath, RetriverMovie(), ratting, releasedate, sinopsis);
@@ -198,17 +216,12 @@ public class DetailDownloadMovie extends AppCompatActivity {
 //                        }
 //                    });
 //                });
-
-                fabPlay.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(DetailDownloadMovie.this, TrailerActivity.class);
-                        intent.putExtra("varIdd", String.valueOf(id));
-                        intent.putExtra("varTrailerId", trailerid);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
+//                fabPlay.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        startActivity(new Intent(DetailDownloadMovie.this, TrailerActivity.class));
+//                    }
+//                });
 //                ivDownload.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -257,48 +270,60 @@ public class DetailDownloadMovie extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Root> call, Throwable t) {
+            public void onFailure(Call<com.example.movies.detailmodel.Root> call, Throwable t) {
 
             }
         });
     }
 
-    private void MyToast (String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
+    private void RetriverMovie(int theid) {
+        pbMovie.setVisibility(View.VISIBLE);
 
-    private String RetriverMovie() {
+        TheApi ardData = Retrofit.getRetrofit().create(TheApi.class);
+        Call<Root> retriverProcess = ardData.getDownload(theid, "A-Z", "Year", "Genre");
 
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("varId");
-
-        GetApi apii = Retrofit.getRetrofit().create(GetApi.class);
-        Call<Root> retriverGenre = apii.getDetail(Integer.parseInt(id), ("0a9d3ed8c00f265589f595b6f3b92228"));
-
-        retriverGenre.enqueue(new Callback<Root>() {
+        retriverProcess.enqueue(new Callback<Root>() {
             @Override
             public void onResponse(Call<Root> call, Response<Root> response) {
-                LinearLayoutManager llm = new LinearLayoutManager(DetailDownloadMovie.this, LinearLayoutManager.HORIZONTAL, false);
-                rvGenre.setLayoutManager(llm);
+                if (response.body().getPesan().equals("Data Kosong")) {
+                    rvTrailerList.setVisibility(View.GONE);
+                    pbMovie.setVisibility(View.INVISIBLE);
+                }
+                if (response.isSuccessful()) {
+                    listFavorit = response.body().getData();
+                    if (listFavorit != null) {
+                        rvTrailerList.setVisibility(View.VISIBLE);
+                        trailerAdapter = new TrailerAdapter(listFavorit);
+                        rvTrailerList.setAdapter(trailerAdapter);
+                        pbMovie.setVisibility(View.INVISIBLE);
 
-                alGenre = response.body().getGenres();
-                arrayString = TextUtils.join(", ", alGenre);
-                adapterGenre = new DetailGenreAdapter(alGenre);
-                rvGenre.setAdapter(adapterGenre);
+                        Intent intent = getIntent();
+                        String trailerid = intent.getStringExtra("varTrailerId");
+
+                        if (trailerid == null) {
+                            ypvVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                                @Override
+                                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                                    youTubePlayer.cueVideo("kpGo2_d3oYE", 0);
+                                }
+                            });
+                        } else {
+                            ypvVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                                @Override
+                                public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                                    youTubePlayer.cueVideo(trailerid, 0);
+                                }
+                            });
+                        }
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<Root> call, Throwable t) {
-                Toast.makeText(DetailDownloadMovie.this, "Failed to call the genre", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TrailerActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                pbMovie.setVisibility(View.INVISIBLE);
             }
         });
-
-        return arrayString;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        RetriverMovie();
     }
 }

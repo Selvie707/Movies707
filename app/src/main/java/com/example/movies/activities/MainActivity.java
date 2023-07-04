@@ -49,6 +49,9 @@ import com.example.movies.models.Result;
 import com.example.movies.models.Root;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +62,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private SearchView svSearch;
-    private TextView tvUserName;
+    private TextView tvUserName, tvInfoemptylist;;
     private EditText etSearch;
-
     private ProgressBar pbMain;
     private RecentlyWatchedAdapter adapterTrending;
     private ArrayList<Result> alTrending;
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("theacc", MODE_PRIVATE);
         username = sp.getString("username", "");
+
+        tvInfoemptylist = findViewById(R.id.tv_download_infoemptylist);
 
         svSearch = findViewById(R.id.et_main_search);
         svSearch.clearFocus();
@@ -180,13 +184,13 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.menu_profile:
 
-                        String username = "Via707";
-                        String bio = "let's go to the space";
+//                        String username = "Via707";
+//                        String bio = "let's go to the space";
 
                         Intent intentProfile = new Intent(getApplicationContext(), ProfileActivity.class);
 
-                        intentProfile.putExtra("varProfilName", username);
-                        intentProfile.putExtra("varProfilBio", bio);
+//                        intentProfile.putExtra("varProfilName", username);
+//                        intentProfile.putExtra("varProfilBio", bio);
 
                         startActivity(intentProfile);
                         overridePendingTransition(0, 0);
@@ -215,8 +219,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (filteredList.isEmpty()) {
-            Toast.makeText(this, "No Movie Found", Toast.LENGTH_SHORT).show();
+            tvInfoemptylist.setVisibility(View.VISIBLE);
+            rvTrending.setVisibility(View.GONE);
         } else {
+            tvInfoemptylist.setVisibility(View.GONE);
+            rvTrending.setVisibility(View.VISIBLE);
             adapterTrending.setFilteredList(filteredList);
         }
     }
@@ -331,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Root> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Gagal guys", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                 pbMain.setVisibility(View.INVISIBLE);
             }
         });

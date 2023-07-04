@@ -161,7 +161,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/tv_popular" />
 
-
                     <TextView
                         android:id="@+id/tv_recentlyWatched"
                         style="@style/TEXT"
@@ -173,6 +172,19 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/vp_popular" />
+
+                    <TextView
+                        android:id="@+id/tv_download_infoemptylist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:layout_marginTop="16dp"
+                        android:text="There is no movie here"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_recentlyWatched"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
